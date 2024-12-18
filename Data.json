@@ -1,0 +1,76 @@
+{
+    "continents": [
+        {
+            "name": "Africa",
+            "countries": [
+                {
+                    "name": "Nigeria",
+                    "cities": [
+                        "Lagos",
+                        "Abuja",
+                        "Kano"
+                    ]
+                },
+                {
+                    "name": "Egypt",
+                    "cities": [
+                        "Cairo",
+                        "Alexandria",
+                        "Giza"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "South America",
+            "countries": [
+                {
+                    "name": "Argentina",
+                    "cities": [
+                        "Buenos Aires",
+                        "C\u00c3\u00b3rdoba",
+                        "Rosario"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Australia",
+            "countries": [
+                {
+                    "name": "Australia",
+                    "cities": [
+                        "Sydney",
+                        "Melbourne",
+                        "Brisbane"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Antarctica",
+            "countries": []
+        },
+        {
+            "name": "Europe",
+            "countries": [
+                {
+                    "name": "Germany",
+                    "cities": [
+                        "Berlin",
+                        "Munich",
+                        "Frankfurt"
+                    ]
+                },
+                {
+                    "name": "France",
+                    "cities": [
+                        "Paris",
+                        "Lyon",
+                        "Marseille"
+                    ]
+                }
+            ]
+        }
+    ]
+}
