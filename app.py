@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 from flask_restx import Api, Resource, fields
-from urllib.parse import quote as url_quote
 from data_handler import read_json, write_json
 import os
 
@@ -280,6 +279,20 @@ class City(Resource):
         write_json(json_filename, data)
         return updated_city
 
+
+@ns.route('/countries/<string:country_name>/continent')
+class CountryContinent(Resource):
+    @ns.doc('get_country_continent')
+    def get(self, country_name):
+        '''Get the continent of a given country'''
+        data = read_json(json_filename)
+        if data is None:
+            return {"error": "Failed to read data"}, 500
+        for continent in data['continents']:
+            for country in continent['countries']:
+                if country['name'] == country_name:
+                    return {"continent": continent['name']}
+        return {"error": "Country not found"}, 404
+
 if __name__ == '__main__':
     app.run(debug=True)
-    
