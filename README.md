@@ -18,7 +18,9 @@ Welcome to my Flask application! This application is designed to manage a hierar
 ## Project Structure
 
 - **app.py**: The main application file that defines the API endpoints and their corresponding logic.
+- **test_app.py**: A test module for testing the functionality of `app.py`.
 - **data_handler.py**: A helper module for reading and writing JSON data.
+- **test_data_handler.py**: A test module for testing the functionality of `data_handler.py`.
 - **Data.json**: A JSON file that stores the hierarchical data of continents, countries, and cities.
 - **Dockerfile**: A file that defines the Docker image for the application.
 - **docker-compose.yml**: A file that defines the services and their configurations for Docker Compose.
@@ -36,7 +38,16 @@ To get started with the application, follow these steps:
    ```sh
     docker-compose up --build
 
-3. **Access the Application**: Open your web browser and navigate to http://localhost:5000.
+3. **Access the Application**: Open your web browser and navigate to http://localhost:5000. 
+
+## Testing Instructions
+
+1. To run tests for the application run pytest
+   ```sh
+    pytest test_data_handler.py
+    pytest test_app.py 
+
+2. Verify Test Results: Check the output of the pytest command to ensure all tests pass.
 
 # API Endpoint Instructions
 
@@ -78,15 +89,6 @@ http://localhost:5000/data
     curl -X GET http://localhost:5000/data/continents/Europe
     ```
 
-- **Update a continent**
-  - **Endpoint**: `/continents/{continent_name}`
-  - **Method**: `PUT`
-  - **Description**: Updates details of a specific continent.
-  - **Example**:
-    ```sh
-    curl -X PUT http://localhost:5000/data/continents/Europe -H "Content-Type: application/json" -d '{"name": "Europe", "countries": [{"name": "France", "cities": ["Paris"]}]}'
-    ```
-
 - **Delete a continent**
   - **Endpoint**: `/continents/{continent_name}`
   - **Method**: `DELETE`
@@ -116,31 +118,22 @@ http://localhost:5000/data
     curl -X POST http://localhost:5000/data/continents/Africa/countries -H "Content-Type: application/json" -d '{"name": "Kenya", "cities": ["Nairobi", "Mombasa"]}'
     ```
 
-- **Get a specific country in a continent**
-  - **Endpoint**: `/continents/{continent_name}/countries/{country_name}`
+- **Get the continent of a given country**
+  - **Endpoint**: `/data/countries/{country_name}/continent`
   - **Method**: `GET`
-  - **Description**: Retrieves details of a specific country in a continent.
+  - **Description**: Retrieves the continent of a given country.
   - **Example**:
     ```sh
-    curl -X GET http://localhost:5000/data/continents/Africa/countries/Kenya
+    curl -X GET http://localhost:5000/data/countries/Nigeria/continent
     ```
 
-- **Update a country in a continent**
-  - **Endpoint**: `/continents/{continent_name}/countries/{country_name}`
-  - **Method**: `PUT`
-  - **Description**: Updates details of a specific country in a continent.
+- **Get the continent of a given country**
+  - **Endpoint**: `/countries/{country_name}/continent`
+  - **Method**: `GET`
+  - **Description**: Retrieves the continent of a given country.
   - **Example**:
     ```sh
-    curl -X PUT http://localhost:5000/data/continents/Africa/countries/Kenya -H "Content-Type: application/json" -d '{"name": "Kenya", "cities": ["Nairobi", "Mombasa", "Kisumu"]}'
-    ```
-
-- **Delete a country in a continent**
-  - **Endpoint**: `/continents/{continent_name}/countries/{country_name}`
-  - **Method**: `DELETE`
-  - **Description**: Deletes a specific country in a continent.
-  - **Example**:
-    ```sh
-    curl -X DELETE http://localhost:5000/data/continents/Africa/countries/Kenya
+    curl -X GET http://localhost:5000/data/countries/Nigeria/continent
     ```
 
 ### Cities
@@ -148,7 +141,7 @@ http://localhost:5000/data
 - **List all cities in a country**
   - **Endpoint**: `/continents/{continent_name}/countries/{country_name}/cities`
   - **Method**: `GET`
-  - **Description**: Retrieves a list of all cities in a specific country.
+  - **Description**: Retrieves a list of all cities in a country.
   - **Example**:
     ```sh
     curl -X GET http://localhost:5000/data/continents/Africa/countries/Nigeria/cities
@@ -157,7 +150,7 @@ http://localhost:5000/data
 - **Create a new city in a country**
   - **Endpoint**: `/continents/{continent_name}/countries/{country_name}/cities`
   - **Method**: `POST`
-  - **Description**: Creates a new city in a specific country.
+  - **Description**: Creates a new city in a country.
   - **Example**:
     ```sh
     curl -X POST http://localhost:5000/data/continents/Africa/countries/Nigeria/cities -H "Content-Type: application/json" -d '{"name": "Ibadan"}'
@@ -166,7 +159,7 @@ http://localhost:5000/data
 - **Get a specific city in a country**
   - **Endpoint**: `/continents/{continent_name}/countries/{country_name}/cities/{city_name}`
   - **Method**: `GET`
-  - **Description**: Retrieves details of a specific city in a country.
+  - **Description**: Retrieves a specific city in a country.
   - **Example**:
     ```sh
     curl -X GET http://localhost:5000/data/continents/Africa/countries/Nigeria/cities/Ibadan
@@ -175,7 +168,7 @@ http://localhost:5000/data
 - **Update a city in a country**
   - **Endpoint**: `/continents/{continent_name}/countries/{country_name}/cities/{city_name}`
   - **Method**: `PUT`
-  - **Description**: Updates details of a specific city in a country.
+  - **Description**: Updates a city in a country.
   - **Example**:
     ```sh
     curl -X PUT http://localhost:5000/data/continents/Africa/countries/Nigeria/cities/Ibadan -H "Content-Type: application/json" -d '{"name": "Ibadan"}'
@@ -184,7 +177,7 @@ http://localhost:5000/data
 - **Delete a city in a country**
   - **Endpoint**: `/continents/{continent_name}/countries/{country_name}/cities/{city_name}`
   - **Method**: `DELETE`
-  - **Description**: Deletes a specific city in a country.
+  - **Description**: Deletes a city in a country.
   - **Example**:
     ```sh
     curl -X DELETE http://localhost:5000/data/continents/Africa/countries/Nigeria/cities/Ibadan
