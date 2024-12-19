@@ -55,6 +55,11 @@ def test_create_city():
     assert response.status_code == 201
     assert response.json()["name"] == "Ibadan"
 
+def test_list_cities():
+    response = requests.get(f"{BASE_URL}/continents/Africa/countries/Nigeria/cities")
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
+
 def test_get_city():
     response = requests.get(f"{BASE_URL}/continents/Africa/countries/Nigeria/cities/Ibadan")
     assert response.status_code == 200
@@ -69,3 +74,8 @@ def test_update_city():
 def test_delete_city():
     response = requests.delete(f"{BASE_URL}/continents/Africa/countries/Nigeria/cities/Ibadan")
     assert response.status_code == 204
+
+def test_get_country_continent():
+    response = requests.get(f"{BASE_URL}/countries/Nigeria/continent")
+    assert response.status_code == 200
+    assert response.json()["continent"] == "Africa"
